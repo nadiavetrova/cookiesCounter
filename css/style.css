@@ -1,0 +1,83 @@
+.box {
+  display: flex;
+  gap: 100px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.section {
+  margin: 100px 0 10px 0;
+}
+
+.like-button {
+  border: none;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+
+/* .container {
+  outline: 1px solid red;
+}
+
+.row {
+  outline: 1px solid rgb(55, 255, 0);
+}
+
+.col-12 {
+  outline: 1px solid rgb(0, 8, 255);
+} */
+
+
+
+
+.tabs {
+  margin: 50px 0;
+  padding: 10px 0;
+  border: 1px solid #bab6d2;
+  background-color: rgba(195, 241, 251, 0.957);
+}
+
+.tabBtn {
+  color: rgb(237, 233, 236);
+  background-color: #9E9E9E;
+  border: 1px solid #9E9E9E;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+  transition: background-color 0.5s ease-in-out;
+}
+
+.tabBtn:hover {
+  background-color: #545151;
+}
+
+.tabBtn.active {
+  background-color: #681d1d;
+}
+
+.tabBtn:disabled {
+  background-color: #f6f9f5;
+}
+
+.disabledBtn:disabled:hover {
+  background-color: #f6f9f5;
+}
+
+.buttonList {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+
+.buttonList {
+  padding: 20px 0;
+}
+
+.tabContent {
+  display: none;
+}
+
+.tabContent.active {
+  display: block;
+}
