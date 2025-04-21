@@ -126,10 +126,11 @@
 // Сохранение и загрузку состояния из cookies.
 // слушатель (clickHandler).
 
-//должно остаься только то, что связвно с  управлением состоянием счетчика
+
 
 
 function counterInit() {
+  // Класс CounterManager только для состояний счетчика
 
   class CounterManager {
     constructor(config) {
@@ -139,11 +140,59 @@ function counterInit() {
     }
 
     stepUp() {
-      return this.count += this.stepSize;
+      this.count += this.stepSize;
     }
 
     stepDown() {
-      return this.count += this.stepSize;
+      this.count -= this.stepSize;
+    }
+
+    getCount() {
+      return this.count;
+    }
+  }
+
+  // Класс UpdateCounter для отображения инзменений счетчика
+
+  class UpdateCounter {
+    constructor(counterManager) {
+      this.counterManager = counterManager;
+      this.counterShower = document.querySelector('.counterShower');
+      this.updateCounter();
+    }
+
+    updateCounter() {
+      if (this.counterShower) {
+        this.counterShower.textContent = this.counterManager.getCount();
+      }
+    }
+  }
+
+  // Класс ClickHandler для слушателя
+
+  class ClickHandler {
+    constructor(counterManager, updateCounter) {
+      this.counterManager = counterManager;
+      this.updateCounter = updateCounter;
+      const buttonsParent = document.querySelector('.counter');
+
+      if (buttonsParent) {
+        buttonsParent.addEventListener('click', this.handleCounterChange.bind(this));
+      }
+    }
+
+    handleCounterChange(e) {
+      const target = e.target;
+      const isBtn = target.tagName === 'BUTTON';
+
+      if (isBtn) {
+        if (target.classList.contains('plus')) {
+          this.counterManager.stepUp();
+        } else if (target.classList.contains('minus')) {
+          this.counterManager.stepDown();
+        }
+        this.updateCounter.updateCounter();
+      }
     }
   }
 
@@ -151,39 +200,26 @@ function counterInit() {
   const myCounterConfig = {
     name: 'Nadia',
     initValue: 50,
-    stepSize: 5
-  }
+    stepSize: 5,
+  };
+
 
   const myCounterManager = new CounterManager(myCounterConfig);
+  const myUpdateCounter = new UpdateCounter(myCounterManager);
+  const myClickHandler = new ClickHandler(myCounterManager, myUpdateCounter);
   console.log(myCounterManager);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  console.log(myUpdateCounter);
+  console.log(myClickHandler);
 }
 
-counterInit()
+counterInit();
+
+
+
+
+
+
+
+
+
+
